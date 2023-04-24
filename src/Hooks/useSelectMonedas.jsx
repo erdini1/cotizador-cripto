@@ -1,12 +1,19 @@
+import styled from '@emotion/styled'
 import React from 'react'
 
-const useSelectMonedas = () => {
+const Label = styled.label`
+  color: #fff
+`
+//Estos Hooks personalizados nos permiten reutilizarlos
+const useSelectMonedas = (label) => {
 
-  const selectMonedas = () => {
-    console.log("Desde el Custom Hook")
-  }
+  const SelectMonedas = () => (
+    <>
+      <Label>{label}</Label>
+    </> 
+  )
 
-  return [selectMonedas]
+  return [SelectMonedas]
 
 }
 
