@@ -26,17 +26,17 @@ const InputSubmit = styled.input`
 const Formulario = () => {
 
     // Dentro de los corchetes va el nombre del componente a utilizar
-    const [ state, SelectMonedas ] = useSelectMonedas("Elige tu moneda", monedas)
+    const [moneda, SelectMonedas] = useSelectMonedas("Elige tu moneda", monedas)
     // const [SelectCriptomonedas] = useSelectMonedas("Elige tu Criptomoneda")
 
     return (
         <form>
 
             {/* Aca llamo al hook que cree anteriormente */}
-            <SelectMonedas/>
+            <SelectMonedas />
             {/* <SelectCriptomonedas/> */}
 
-            {state}
+            {moneda}
 
             <InputSubmit
                 type="submit"
