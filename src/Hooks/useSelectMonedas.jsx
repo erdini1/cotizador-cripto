@@ -3,15 +3,31 @@ import React from 'react'
 
 const Label = styled.label`
   color: #fff;
+  display: block; //Para que no esten pegados, uno arriba y otro abajo
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 15px 0;
 `
+
+const Select = styled.select`
+  width: 100%;
+  font-size: 18px;
+  padding: 14px;
+  border-radius: 10px;
+  /* text-align: center; */
+  /* margin-bottom: 20px; */
+`
+
+
 //Estos Hooks personalizados nos permiten reutilizarlos
 const useSelectMonedas = (label, opciones) => {
 
   const SelectMonedas = () => (
     <>
       <Label>{label}</Label>
-      <select name="" id="">
-        <option value="">-- Seleccione --</option>
+      <Select>
+        <option value="">Seleccione</option>
 
         {opciones.map(opcion => (
           <option
@@ -20,7 +36,7 @@ const useSelectMonedas = (label, opciones) => {
           >{opcion.nombre}</option>
         ))}
 
-      </select>
+      </Select>
     </>
   )
 
