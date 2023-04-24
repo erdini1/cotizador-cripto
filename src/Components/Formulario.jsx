@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import useSelectMonedas from '../Hooks/useSelectMonedas'
+import { monedas } from '../data/monedas'
 
 
 const InputSubmit = styled.input`
@@ -24,15 +25,15 @@ const InputSubmit = styled.input`
 const Formulario = () => {
 
     // Dentro de los corchetes va el nombre del componente a utilizar
-    const [SelectMonedas] = useSelectMonedas("Elige tu moneda")
-    const [SelectCriptomonedas] = useSelectMonedas("Elige tu Criptomoneda")
+    const [SelectMonedas] = useSelectMonedas("Elige tu moneda", monedas)
+    // const [SelectCriptomonedas] = useSelectMonedas("Elige tu Criptomoneda")
 
     return (
         <form>
 
             {/* Aca llamo al hook que cree anteriormente */}
             <SelectMonedas/>
-            <SelectCriptomonedas/>
+            {/* <SelectCriptomonedas/> */}
 
             <InputSubmit
                 type="submit"
