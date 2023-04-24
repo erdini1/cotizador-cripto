@@ -33,8 +33,9 @@ const Formulario = ({ setMonedas }) => {
     const [moneda, SelectMonedas] = useSelectMonedas("Elige tu moneda", monedas)
     const [criptomoneda, SelectCriptomonedas] = useSelectMonedas("Elige tu Criptomoneda", criptos)
 
-    useEffect(() => {   //cuando el componente este listo va a llamar a la api
-        // Lo ideal es que solamente se consulte cuando todo el docuemento este listo
+    //cuando el componente este listo va a llamar a la api
+    // Lo ideal es que solamente se consulte cuando todo el docuemento este listo
+    useEffect(() => {   
         const consultarAPI = async () => {
             const url = "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD"
 

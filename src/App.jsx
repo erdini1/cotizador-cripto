@@ -43,11 +43,27 @@ const Imagen = styled.img`
 function App() {
 
   const [monedas, setMonedas] = useState({})
+  const [resultado, setResultado] = useState({})
 
   useEffect(() => {
-    if(Object.keys(monedas).length > 0) { //Pongo una condicion para ver si hay algo en el array de monedas
-      console.log(monedas)
+    if(Object.keys(monedas).length > 0) { //Pongo una condicion para ver si hay algo en el array de monedas, si no tiene los dos select no deberia ejecutarse
 
+      const cotizarCripto = async () => {
+        const {moneda, criptomoneda} = monedas
+        const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
+
+        const respuesta = await fetch(url)
+        const resultado = await respuesta.json()
+        //El siguiente es un metodo para acceder a un json de manera dinamica
+        setResultado(resultado.DISPLAY[criptomoneda][moneda])
+        // console.log(`Precio de ${criptomoneda} en ${moneda}: ${precio}`)
+
+
+      }
+
+
+
+      cotizarCripto()
     }
   }, [monedas])
 
