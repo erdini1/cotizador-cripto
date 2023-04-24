@@ -1,5 +1,5 @@
+import { useState } from 'react'
 import styled from '@emotion/styled'
-import React from 'react'
 
 const Label = styled.label`
   color: #fff;
@@ -23,10 +23,16 @@ const Select = styled.select`
 //Estos Hooks personalizados nos permiten reutilizarlos
 const useSelectMonedas = (label, opciones) => {
 
+  // tiene un nombre generico porque la idea es reutilizarlo
+  const [state, setState] = useState("")
+
   const SelectMonedas = () => (
     <>
       <Label>{label}</Label>
-      <Select>
+      <Select
+        value={state}
+        onChange={e => setState(e.target.value)}
+      >
         <option value="">Seleccione</option>
 
         {opciones.map(opcion => (
@@ -40,7 +46,7 @@ const useSelectMonedas = (label, opciones) => {
     </>
   )
 
-  return [SelectMonedas]
+  return [state, SelectMonedas]
 
 }
 
