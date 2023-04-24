@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import useSelectMonedas from '../Hooks/useSelectMonedas'
 import { monedas } from '../data/monedas'
@@ -25,9 +25,11 @@ const InputSubmit = styled.input`
 
 const Formulario = () => {
 
+    const [criptos, setCriptos] = useState([])
+
     // Dentro de los corchetes va el nombre del componente a utilizar
     const [moneda, SelectMonedas] = useSelectMonedas("Elige tu moneda", monedas)
-    // const [SelectCriptomonedas] = useSelectMonedas("Elige tu Criptomoneda")
+    const [criptomoneda, SelectCriptomonedas] = useSelectMonedas("Elige tu Criptomoneda", criptos)
 
     useEffect(() => {   //cuando el componente este listo va a llamar a la api
         // Lo ideal es que solamente se consulte cuando todo el docuemento este listo
@@ -36,12 +38,19 @@ const Formulario = () => {
 
             const respuesta = await fetch(url)  //va a esperar hasta que este la info
             const resultado = await respuesta.json()
-            console.log(resultado.Data)
 
+
+            const arrayCriptos = resultado.Data.map(cripto => {
+                const objeto = {
+                    id: cripto.CoinInfo.Name,
+                    nombre: cripto.CoinInfo.FullName
+                }
+                return objeto
+            })
+            setCriptos(arrayCriptos)
         }
         consultarAPI()
     }, [])
-    // Puedo
 
 
     return (
@@ -49,7 +58,7 @@ const Formulario = () => {
 
             {/* Aca llamo al hook que cree anteriormente */}
             <SelectMonedas />
-            {/* <SelectCriptomonedas/> */}
+            <SelectCriptomonedas/>
 
             {moneda}
 
