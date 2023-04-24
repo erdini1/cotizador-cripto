@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import styled from '@emotion/styled'
 import useSelectMonedas from '../Hooks/useSelectMonedas'
 import { monedas } from '../data/monedas'
@@ -28,6 +28,21 @@ const Formulario = () => {
     // Dentro de los corchetes va el nombre del componente a utilizar
     const [moneda, SelectMonedas] = useSelectMonedas("Elige tu moneda", monedas)
     // const [SelectCriptomonedas] = useSelectMonedas("Elige tu Criptomoneda")
+
+    useEffect(() => {   //cuando el componente este listo va a llamar a la api
+        // Lo ideal es que solamente se consulte cuando todo el docuemento este listo
+        const consultarAPI = async () => {
+            const url = "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD"
+
+            const respuesta = await fetch(url)  //va a esperar hasta que este la info
+            const resultado = await respuesta.json()
+            console.log(resultado.Data)
+
+        }
+        consultarAPI()
+    }, [])
+    // Puedo
+
 
     return (
         <form>
