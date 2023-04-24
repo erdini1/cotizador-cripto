@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import useSelectMonedas from '../Hooks/useSelectMonedas'
 
 
 const InputSubmit = styled.input`
@@ -21,6 +22,11 @@ const InputSubmit = styled.input`
 `
 
 const Formulario = () => {
+
+    const [selectMonedas] = useSelectMonedas()
+
+    selectMonedas()
+
     return (
         <form>
             <InputSubmit
