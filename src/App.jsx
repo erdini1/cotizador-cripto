@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import Formulario from './Components/Formulario'
+import Resultado from './Components/Resultado'
 import ImagenCripto from "./img/imagen-criptos.png"
 
 const Contenedor = styled.div`
@@ -46,10 +47,10 @@ function App() {
   const [resultado, setResultado] = useState({})
 
   useEffect(() => {
-    if(Object.keys(monedas).length > 0) { //Pongo una condicion para ver si hay algo en el array de monedas, si no tiene los dos select no deberia ejecutarse
+    if (Object.keys(monedas).length > 0) { //Pongo una condicion para ver si hay algo en el array de monedas, si no tiene los dos select no deberia ejecutarse
 
       const cotizarCripto = async () => {
-        const {moneda, criptomoneda} = monedas
+        const { moneda, criptomoneda } = monedas
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
 
         const respuesta = await fetch(url)
@@ -57,11 +58,7 @@ function App() {
         //El siguiente es un metodo para acceder a un json de manera dinamica
         setResultado(resultado.DISPLAY[criptomoneda][moneda])
         // console.log(`Precio de ${criptomoneda} en ${moneda}: ${precio}`)
-
-
       }
-
-
 
       cotizarCripto()
     }
@@ -74,10 +71,14 @@ function App() {
         alt='Imagenes Criptomonedas'
       />
       <div>
-        <Heading>Cotiza criptomonedas al instante</Heading>
+        <Heading>COTIZA CRIPTOMONEDAS</Heading>
         <Formulario
           setMonedas={setMonedas}
         />
+
+        {/* esto quiere decir que cuando resultado.price tenga algo va a imprimir el componente */}
+        {resultado.PRICE && <Resultado resultado={resultado} />}
+
       </div>
     </Contenedor>
   )

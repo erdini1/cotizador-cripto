@@ -35,7 +35,7 @@ const Formulario = ({ setMonedas }) => {
 
     //cuando el componente este listo va a llamar a la api
     // Lo ideal es que solamente se consulte cuando todo el docuemento este listo
-    useEffect(() => {   
+    useEffect(() => {
         const consultarAPI = async () => {
             const url = "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD"
 
