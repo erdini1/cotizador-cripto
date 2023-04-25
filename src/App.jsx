@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import Formulario from './Components/Formulario'
 import Resultado from './Components/Resultado'
+import Spinner from './Components/Spinner'
 import ImagenCripto from "./img/imagen-criptos.png"
 
 const Contenedor = styled.div`
@@ -45,11 +46,15 @@ function App() {
 
   const [monedas, setMonedas] = useState({})
   const [resultado, setResultado] = useState({})
+  const [cargando, setCargando] = useState(false)
 
   useEffect(() => {
     if (Object.keys(monedas).length > 0) { //Pongo una condicion para ver si hay algo en el array de monedas, si no tiene los dos select no deberia ejecutarse
 
       const cotizarCripto = async () => {
+        setCargando(true)
+        setResultado({})
+
         const { moneda, criptomoneda } = monedas
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
 
@@ -58,6 +63,7 @@ function App() {
         //El siguiente es un metodo para acceder a un json de manera dinamica
         setResultado(resultado.DISPLAY[criptomoneda][moneda])
         // console.log(`Precio de ${criptomoneda} en ${moneda}: ${precio}`)
+        setCargando(false)
       }
 
       cotizarCripto()
@@ -76,6 +82,8 @@ function App() {
           setMonedas={setMonedas}
         />
 
+
+        {cargando && <Spinner/>}
         {/* esto quiere decir que cuando resultado.price tenga algo va a imprimir el componente */}
         {resultado.PRICE && <Resultado resultado={resultado} />}
 
